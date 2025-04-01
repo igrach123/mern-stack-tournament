@@ -1,0 +1,9 @@
+# Tasks Log - Fortnite Tournament Manager
+
+## 2024-04-01
+- [x] Project directory structure created
+- [x] Server and client directories created
+- [x] Memlog system initialized
+- [x] Backend server setup (dependencies installed and server running)
+- [x] Frontend client setup (React app created)
+- [x] Database connection established (environment configured)

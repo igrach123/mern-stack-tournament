@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createPlayer, updatePlayer } from "../services/playerService";
+import { Form, Button, Card } from "react-bootstrap";
 
 const PlayerForm = ({ player, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -30,41 +31,62 @@ const PlayerForm = ({ player, onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Kills:</label>
-        <input
-          type="number"
-          name="kills"
-          value={formData.kills}
-          onChange={handleChange}
-          min="0"
-          required
-        />
-      </div>
-      <div>
-        <label>Place:</label>
-        <input
-          type="number"
-          name="place"
-          value={formData.place}
-          onChange={handleChange}
-          min="1"
-          required
-        />
-      </div>
-      <button type="submit">Save</button>
-    </form>
+    <Card className="mb-4 border-secondary">
+      <Card.Header className="bg-primary text-white">
+        <h5 className="mb-0">
+          <i className="fas fa-user-edit me-2"></i>
+          {player ? "Edit Player" : "Add New Player"}
+        </h5>
+      </Card.Header>
+      <Card.Body>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Player Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Enter player name"
+              required
+              disabled={false}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Kills</Form.Label>
+            <Form.Control
+              type="number"
+              name="kills"
+              value={formData.kills}
+              onChange={handleChange}
+              min="0"
+              required
+              disabled={false}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Placement</Form.Label>
+            <Form.Control
+              type="number"
+              name="place"
+              value={formData.place}
+              onChange={handleChange}
+              min="1"
+              required
+            />
+          </Form.Group>
+
+          <div className="d-flex justify-content-end">
+            <Button variant="game" type="submit" className="px-4">
+              <i className="fas fa-save me-2"></i>
+              Save Player
+            </Button>
+          </div>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 };
 

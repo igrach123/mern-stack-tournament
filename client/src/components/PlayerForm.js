@@ -1,12 +1,23 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { createPlayer, updatePlayer } from "../services/playerService";
 import { Form, Button, Card } from "react-bootstrap";
 
 const PlayerForm = ({ player, onSuccess }) => {
+  const location = useLocation();
+  const defaultGameType = location.pathname.includes("fortnite")
+    ? "fortnite"
+    : "ea_fc";
+
   const [formData, setFormData] = useState({
     name: player?.name || "",
-    kills: player?.kills || 0,
-    place: player?.place || 1,
+    gameType: player?.gameType || defaultGameType,
+    ...(player?.gameType === "fortnite"
+      ? {
+          kills: player?.kills || 0,
+          place: player?.place || 1,
+        }
+      : {}),
   });
 
   const handleChange = (e) => {
@@ -49,34 +60,36 @@ const PlayerForm = ({ player, onSuccess }) => {
               onChange={handleChange}
               placeholder="Enter player name"
               required
-              disabled={false}
             />
           </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Kills</Form.Label>
-            <Form.Control
-              type="number"
-              name="kills"
-              value={formData.kills}
-              onChange={handleChange}
-              min="0"
-              required
-              disabled={false}
-            />
-          </Form.Group>
+          {formData.gameType === "fortnite" && (
+            <>
+              <Form.Group className="mb-3">
+                <Form.Label>Kills</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="kills"
+                  value={formData.kills || 0}
+                  onChange={handleChange}
+                  min="0"
+                  required
+                />
+              </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Placement</Form.Label>
-            <Form.Control
-              type="number"
-              name="place"
-              value={formData.place}
-              onChange={handleChange}
-              min="1"
-              required
-            />
-          </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Placement</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="place"
+                  value={formData.place || 1}
+                  onChange={handleChange}
+                  min="1"
+                  required
+                />
+              </Form.Group>
+            </>
+          )}
 
           <div className="d-flex justify-content-end">
             <Button variant="game" type="submit" className="px-4">

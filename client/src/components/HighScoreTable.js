@@ -13,7 +13,7 @@ const HighScoreTable = () => {
 
   const fetchPlayers = async () => {
     try {
-      const response = await getPlayers();
+      const response = await getPlayers({ gameType: "fortnite" });
       setPlayers(response.data);
     } catch (err) {
       console.error("Error fetching players:", err);
@@ -51,7 +51,7 @@ const HighScoreTable = () => {
           <PlayerForm player={editingPlayer} onSuccess={handleFormSuccess} />
         ) : (
           <>
-            <PlayerForm onSuccess={fetchPlayers} />
+            <PlayerForm onSuccess={fetchPlayers} gameType="fortnite" />
 
             <Table striped bordered hover variant="dark" className="mt-4">
               <thead>

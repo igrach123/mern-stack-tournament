@@ -6,20 +6,31 @@ const playerSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  gameType: {
+    type: String,
+    enum: ["fortnite", "ea_fc"],
+    required: true,
+    immutable: true, // Prevent changing gameType after creation
+  },
+  // Fortnite specific fields
   kills: {
     type: Number,
-    required: true,
     min: 0,
+    required: function () {
+      return this.gameType === "fortnite";
+    },
   },
   place: {
     type: Number,
-    required: true,
     min: 1,
+    required: function () {
+      return this.gameType === "fortnite";
+    },
   },
   score: {
     type: Number,
-    default: 0,
   },
+  // EA FC fields can be added here if needed
 });
 
 // Calculate score before saving

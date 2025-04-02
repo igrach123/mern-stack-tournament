@@ -28,18 +28,26 @@ body {
   --bs-table-striped-bg: rgba(0, 0, 0, 0.3);
 }
 
+/* Layout styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 100%;
+}
+
 /* Form styles */
 .form-control {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid #444;
-  color: white;
+  background-color: #e0e0e0;
+  border: 1px solid #b0b0b0;
+  color: #333;
 }
 
 .form-control:focus {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: white;
-  border-color: #ff2d75;
-  box-shadow: 0 0 0 0.25rem rgba(255, 45, 117, 0.25);
+  background-color: #f0f0f0;
+  color: #333;
+  border-color: #666;
+  box-shadow: 0 0 0 0.25rem rgba(100, 100, 100, 0.25);
 }
 
 /* Animation for top rank */

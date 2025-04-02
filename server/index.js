@@ -17,7 +17,10 @@ mongoose
 
 // Routes
 const playerRoutes = require("./routes/players");
+const tournamentRoutes = require("./routes/tournaments");
+
 app.use("/api/players", playerRoutes);
+app.use("/api/tournaments", tournamentRoutes);
 
 // Basic route
 app.get("/", (req, res) => {
